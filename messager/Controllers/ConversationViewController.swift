@@ -12,12 +12,14 @@ class ConversationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Chats"
         view.backgroundColor = .red
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        validateAuth()
+//        validateAuth()
+        edgesForExtendedLayout = []
     }
 }
 
@@ -32,13 +34,13 @@ private extension ConversationViewController {
         } else {
             let user = Auth.auth().currentUser
 
-            user?.delete { error in
-              if let error = error {
-                // An error happened.
-              } else {
-                // Account deleted.
-              }
-            }
+//            user?.delete { error in
+//              if let error = error {
+//                // An error happened.
+//              } else {
+//                // Account deleted.
+//              }
+//            }
         }
     }
 }

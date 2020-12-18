@@ -13,6 +13,7 @@
 		481B92F1258A48B2002D7D63 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 481B92F0258A48B2002D7D63 /* GoogleService-Info.plist */; };
 		481B92F7258B494E002D7D63 /* testViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481B92F6258B494E002D7D63 /* testViewController.swift */; };
 		481B930D258CC9D9002D7D63 /* Decorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481B930C258CC9D9002D7D63 /* Decorator.swift */; };
+		481B9312258CE100002D7D63 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481B9311258CE100002D7D63 /* MainTabBarViewController.swift */; };
 		48374C23258365F2005968D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48374C22258365F2005968D1 /* AppDelegate.swift */; };
 		48374C27258365F2005968D1 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48374C26258365F2005968D1 /* ConversationViewController.swift */; };
 		48374C2A258365F2005968D1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48374C28258365F2005968D1 /* Main.storyboard */; };
@@ -35,6 +36,7 @@
 		481B92F0258A48B2002D7D63 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		481B92F6258B494E002D7D63 /* testViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testViewController.swift; sourceTree = "<group>"; };
 		481B930C258CC9D9002D7D63 /* Decorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decorator.swift; sourceTree = "<group>"; };
+		481B9311258CE100002D7D63 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		48374C1F258365F2005968D1 /* messager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = messager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		48374C22258365F2005968D1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		48374C26258365F2005968D1 /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
@@ -118,11 +120,12 @@
 			isa = PBXGroup;
 			children = (
 				48374C26258365F2005968D1 /* ConversationViewController.swift */,
+				48374C4D258366B3005968D1 /* ProfileViewController.swift */,
+				481B9311258CE100002D7D63 /* MainTabBarViewController.swift */,
 				48374C4225836678005968D1 /* Login&Register */,
 				48374C442583668A005968D1 /* PhotoViewerViewController.swift */,
 				48374C4725836699005968D1 /* VideoPlayerViewController.swift */,
 				48374C4A258366A6005968D1 /* NewConversationViewController.swift */,
-				48374C4D258366B3005968D1 /* ProfileViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				481B9312258CE100002D7D63 /* MainTabBarViewController.swift in Sources */,
 				48374C3D2583666D005968D1 /* LoginViewController.swift in Sources */,
 				48374C4B258366A6005968D1 /* NewConversationViewController.swift in Sources */,
 				48374C27258365F2005968D1 /* ConversationViewController.swift in Sources */,
