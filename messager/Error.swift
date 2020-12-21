@@ -12,6 +12,7 @@ enum Errors: Error {
     case noUserId
     case noUserToken
     case noFullFillProfile
+    case noLogout
     
     var errorText: String {
         switch self {
@@ -21,6 +22,8 @@ enum Errors: Error {
             return "User token not obtained"
         case .noFullFillProfile:
             return "Please fill all field"
+        case .noLogout:
+            return "Failed to logout"
         }
     }
 }

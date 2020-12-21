@@ -7,7 +7,7 @@
 
 import UIKit
 import FirebaseAuth
-
+import FBSDKLoginKit
 class LoginViewController: UIViewController {
 
     private let scrollView = UIScrollView()
@@ -17,7 +17,7 @@ class LoginViewController: UIViewController {
     private let emailField = UITextField()
     
     private let passwordField = UITextField()
-    
+    private let loginFBButton = FBLoginButton()
     private let loginButton: UIButton = {
         let button = UIButton()
         button.setTitle("Login", for: .normal)
@@ -46,7 +46,7 @@ class LoginViewController: UIViewController {
 
 private extension LoginViewController {
     
-    @objc func didTapedRegister() {
+    @objc func didTapedRegisterNavButton() {
         emailField.resignFirstResponder()
         passwordField.resignFirstResponder()
         let vc = RegisterViewController()
@@ -78,9 +78,10 @@ private extension LoginViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Register",
                                                             style: .done,
                                                             target: self,
-                                                            action: #selector(didTapedRegister))
+                                                            action: #selector(didTapedRegisterNavButton))
         emailField.delegate = self
         passwordField.delegate = self
+        loginFBButton.delegate = self
         
         view.addSubview(scrollView)
         scrollView.addSubview(myView)
@@ -89,10 +90,12 @@ private extension LoginViewController {
         myView.addSubview(emailField)
         myView.addSubview(passwordField)
         myView.addSubview(loginButton)
+        myView.addSubview(loginFBButton)
         
-        Decorator.shared.decorateTextField(textField: emailField, placeholderName: "Email", returnType: .next)
-        Decorator.shared.decorateTextField(textField: passwordField, placeholderName: "Password", returnType: .done)
+        Decorator.decorateTextField(textField: emailField, placeholderName: "Email", returnType: .next)
+        Decorator.decorateTextField(textField: passwordField, placeholderName: "Password", returnType: .done)
         
+        loginFBButton.permissions = ["email, public_profile"]
         setConstaints()
     }
     
@@ -141,6 +144,16 @@ private extension LoginViewController {
                           leftConstant: 64,
                           rightConstant: 64,
                           heightConstant: 50)
+        
+        if let constraint = loginFBButton.constraints.first(where: { (constraint) -> Bool in
+            return constraint.firstAttribute == .height
+        }) {
+            constraint.constant = 40.0
+        }
+        loginFBButton.anchorCenterXToSuperview()
+        loginFBButton.anchor(top: loginButton.bottomAnchor,
+                             width: loginButton.widthAnchor,
+                             topConstant: 32)
     }
     
     func alertUserLoginError() {
@@ -160,5 +173,55 @@ extension LoginViewController: UITextFieldDelegate {
         }
         
         return true
+    }
+}
+
+extension LoginViewController: LoginButtonDelegate {
+    func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
+        
+    }
+    func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
+        guard let token = result?.token?.tokenString else { alertUserLoginError(); return }
+        
+        let facebookRequest = FBSDKLoginKit.GraphRequest(graphPath: "me",
+                                                         parameters: ["fields": "email, name"],
+                                                         tokenString: token,
+                                                         version: nil,
+                                                         httpMethod: .get)
+        facebookRequest.start { (_, result, error) in
+            guard let result = result as? [String: Any], error == nil else { return }
+            guard let userName = result["name"] as? String,
+                  let email = result["email"] as? String else {print("failed to get name email from fb"); return }
+
+            
+            let nameComponents = userName.components(separatedBy: "")
+            guard nameComponents.count == 2 else { return }
+            
+            let firstName = nameComponents.first
+            let lastName = nameComponents.last
+            
+            DatabaseManager.shared.userExists(with: email) { (exists) in
+                if !exists {
+                    DatabaseManager.shared.insertUser(with: ChatAppUser(firstName: firstName ?? "",
+                                                                        lastName: lastName ?? "",
+                                                                        emailAdress: email))
+                }
+            }
+            let credential = FacebookAuthProvider.credential(withAccessToken: token)
+            FirebaseAuth.Auth.auth().signIn(with: credential) { [weak self] (authResult, error) in
+                guard let self = self else { return }
+
+                guard authResult != nil, error == nil else {
+                    if let error = error {
+                        print("error MFA needed")
+                    }
+                    return
+                }
+                print("Vse good")
+                self.navigationController?.dismiss(animated: true, completion: nil)
+
+            }
+        }
+
     }
 }

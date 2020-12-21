@@ -14,6 +14,8 @@
 		481B92F7258B494E002D7D63 /* testViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481B92F6258B494E002D7D63 /* testViewController.swift */; };
 		481B930D258CC9D9002D7D63 /* Decorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481B930C258CC9D9002D7D63 /* Decorator.swift */; };
 		481B9312258CE100002D7D63 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481B9311258CE100002D7D63 /* MainTabBarViewController.swift */; };
+		481B9316258CF5B2002D7D63 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481B9315258CF5B2002D7D63 /* Utils.swift */; };
+		481B932C258E3562002D7D63 /* UITableVIewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481B932B258E3562002D7D63 /* UITableVIewCell.swift */; };
 		48374C23258365F2005968D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48374C22258365F2005968D1 /* AppDelegate.swift */; };
 		48374C27258365F2005968D1 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48374C26258365F2005968D1 /* ConversationViewController.swift */; };
 		48374C2A258365F2005968D1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48374C28258365F2005968D1 /* Main.storyboard */; };
@@ -37,6 +39,8 @@
 		481B92F6258B494E002D7D63 /* testViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testViewController.swift; sourceTree = "<group>"; };
 		481B930C258CC9D9002D7D63 /* Decorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decorator.swift; sourceTree = "<group>"; };
 		481B9311258CE100002D7D63 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
+		481B9315258CF5B2002D7D63 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		481B932B258E3562002D7D63 /* UITableVIewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableVIewCell.swift; sourceTree = "<group>"; };
 		48374C1F258365F2005968D1 /* messager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = messager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		48374C22258365F2005968D1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		48374C26258365F2005968D1 /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
@@ -106,11 +110,13 @@
 				48374C2D258365F4005968D1 /* LaunchScreen.storyboard */,
 				48374C30258365F4005968D1 /* Info.plist */,
 				48374C9125839AE1005968D1 /* UIView.swift */,
+				481B932B258E3562002D7D63 /* UITableVIewCell.swift */,
 				481B922F25875094002D7D63 /* Logger.swift */,
 				481B92D32588F0DC002D7D63 /* DatabaseManager.swift */,
 				481B92D7258A2154002D7D63 /* Error.swift */,
 				481B92F6258B494E002D7D63 /* testViewController.swift */,
 				481B930C258CC9D9002D7D63 /* Decorator.swift */,
+				481B9315258CF5B2002D7D63 /* Utils.swift */,
 				48374C20258365F2005968D1 /* Products */,
 			);
 			path = messager;
@@ -289,9 +295,11 @@
 				48374C452583668A005968D1 /* PhotoViewerViewController.swift in Sources */,
 				481B92D8258A2154002D7D63 /* Error.swift in Sources */,
 				48374C4825836699005968D1 /* VideoPlayerViewController.swift in Sources */,
+				481B9316258CF5B2002D7D63 /* Utils.swift in Sources */,
 				481B923025875094002D7D63 /* Logger.swift in Sources */,
 				48374C23258365F2005968D1 /* AppDelegate.swift in Sources */,
 				48374C4E258366B3005968D1 /* ProfileViewController.swift in Sources */,
+				481B932C258E3562002D7D63 /* UITableVIewCell.swift in Sources */,
 				48374C9225839AE1005968D1 /* UIView.swift in Sources */,
 				481B92F7258B494E002D7D63 /* testViewController.swift in Sources */,
 				48374C4025836674005968D1 /* RegisterViewController.swift in Sources */,
@@ -447,6 +455,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S6X8QU6ZAU;
 				INFOPLIST_FILE = messager/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -467,6 +476,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S6X8QU6ZAU;
 				INFOPLIST_FILE = messager/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

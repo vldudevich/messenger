@@ -36,7 +36,11 @@ class RegisterViewController: UIViewController {
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "person.circle")
+        if #available(iOS 13.0, *) {
+            imageView.image = UIImage(systemName: "person.circle")
+        } else {
+            imageView.image = UIImage(named: "person")
+        }
         imageView.tintColor = .gray
         imageView.contentMode = .scaleAspectFit
         imageView.layer.masksToBounds = true
@@ -56,6 +60,7 @@ class RegisterViewController: UIViewController {
         lastNameField.delegate = self
         
         setupUI()
+        
     }
 }
 
@@ -128,10 +133,10 @@ private extension RegisterViewController {
         scrollSubView.addSubview(lastNameField)
         scrollSubView.addSubview(registerButton)
         
-        Decorator.shared.decorateTextField(textField: emailField, placeholderName: "Email", returnType: .next)
-        Decorator.shared.decorateTextField(textField: passwordField, placeholderName: "Password", returnType: .next, isSecure: true)
-        Decorator.shared.decorateTextField(textField: firstNameField, placeholderName: "FirstName", returnType: .next)
-        Decorator.shared.decorateTextField(textField: lastNameField, placeholderName: "LastName", returnType: .done)
+        Decorator.decorateTextField(textField: emailField, placeholderName: "Email", returnType: .next)
+        Decorator.decorateTextField(textField: passwordField, placeholderName: "Password", returnType: .next, isSecure: true)
+        Decorator.decorateTextField(textField: firstNameField, placeholderName: "FirstName", returnType: .next)
+        Decorator.decorateTextField(textField: lastNameField, placeholderName: "LastName", returnType: .done)
         
         setConstaints()
         

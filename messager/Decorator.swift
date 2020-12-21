@@ -11,9 +11,7 @@ class Decorator {
     
     private init() {}
     
-    static let shared = Decorator()
-    
-    func decorateTextField(textField: UITextField,
+    static func decorateTextField(textField: UITextField,
                                   placeholderName: String,
                                   returnType: UIReturnKeyType,
                                   isSecure: Bool = false) {

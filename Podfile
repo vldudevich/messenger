@@ -6,10 +6,10 @@ target 'messager' do
   use_frameworks!
 pod 'Firebase/Auth'
 pod 'Firebase/Analytics'
-pod 'Firebase/Core'
 pod 'Firebase/Crashlytics'
 pod 'Firebase/Database'
 pod 'IQKeyboardManager'
+pod 'FBSDKLoginKit'
   # Pods for messager
 
 end

@@ -13,22 +13,29 @@ class MainTabBarViewController: UITabBarController {
         super.viewDidLoad()
 
         viewControllers = [
-            createTabBarItem(tabBarTitle: "Chats", tabBarImage: "message", viewController: ConversationViewController()),
-            createTabBarItem(tabBarTitle: "Profile", tabBarImage: "person", viewController: ProfileViewController())
+            createTabBarItem(tabBarTitle: "Chats",
+                             tabBarImage: "message",
+                             viewController: ConversationViewController()),
+            
+            createTabBarItem(tabBarTitle: "Profile",
+                             tabBarImage: "person",
+                             viewController: ProfileViewController())
         ]
     }
     
-    func createTabBarItem(tabBarTitle: String,
+    private func createTabBarItem(tabBarTitle: String,
                           tabBarImage: String,
                           viewController: UIViewController) -> UINavigationController {
         
         let navCont = UINavigationController(rootViewController: viewController)
-        viewController.edgesForExtendedLayout = []
         navCont.tabBarItem.title = tabBarTitle
-        navCont.tabBarItem.image = UIImage(systemName: tabBarImage)
-        
-        navCont.navigationBar.barTintColor = .lightGray
-        navCont.navigationBar.tintColor = .systemBlue
+        if #available(iOS 13.0, *) {
+            navCont.tabBarItem.image = UIImage(systemName: tabBarImage)
+        } else {
+            navCont.tabBarItem.image = UIImage(named: tabBarImage)
+        }
+        navCont.navigationBar.prefersLargeTitles = true
+
         return navCont
     }
 }

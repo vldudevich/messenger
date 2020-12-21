@@ -8,22 +8,29 @@
 import UIKit
 import FirebaseAuth
 import FirebaseDatabase
+
 class ConversationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Chats"
-        view.backgroundColor = .red
+        setupUI()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        validateAuth()
-        edgesForExtendedLayout = []
+        validateAuth()
     }
 }
 
 private extension ConversationViewController {
+    func setupUI() {
+        title = "Chats"
+        view.backgroundColor = .red
+        let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.black]
+        navigationController?.navigationBar.largeTitleTextAttributes = textAttributes
+        edgesForExtendedLayout = []
+    }
+    
     func validateAuth() {
         if FirebaseAuth.Auth.auth().currentUser == nil {
 
