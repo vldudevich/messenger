@@ -118,7 +118,6 @@ private extension RegisterViewController {
     func setupUI() {
         
         title = "Registration"
-        view.backgroundColor = .white
         
         scrollView.backgroundColor = .white
         

@@ -10,6 +10,7 @@ pod 'Firebase/Crashlytics'
 pod 'Firebase/Database'
 pod 'IQKeyboardManager'
 pod 'FBSDKLoginKit'
+pod 'GoogleSignIn'
   # Pods for messager
 
 end

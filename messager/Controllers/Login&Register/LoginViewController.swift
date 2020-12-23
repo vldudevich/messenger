@@ -8,6 +8,8 @@
 import UIKit
 import FirebaseAuth
 import FBSDKLoginKit
+import GoogleSignIn
+
 class LoginViewController: UIViewController {
 
     private let scrollView = UIScrollView()
@@ -15,9 +17,10 @@ class LoginViewController: UIViewController {
     private let myView = UIView()
 
     private let emailField = UITextField()
-    
     private let passwordField = UITextField()
+    
     private let loginFBButton = FBLoginButton()
+    private let loginGLButton = GIDSignInButton()
     private let loginButton: UIButton = {
         let button = UIButton()
         button.setTitle("Login", for: .normal)
@@ -91,10 +94,13 @@ private extension LoginViewController {
         myView.addSubview(passwordField)
         myView.addSubview(loginButton)
         myView.addSubview(loginFBButton)
+        myView.addSubview(loginGLButton)
         
         Decorator.decorateTextField(textField: emailField, placeholderName: "Email", returnType: .next)
         Decorator.decorateTextField(textField: passwordField, placeholderName: "Password", returnType: .done)
-        
+        GIDSignIn.sharedInstance()?.presentingViewController = self
+        GIDSignIn.sharedInstance().signIn()
+        GIDSignIn.sharedInstance().delegate = self
         loginFBButton.permissions = ["email, public_profile"]
         setConstaints()
     }
@@ -153,7 +159,12 @@ private extension LoginViewController {
         loginFBButton.anchorCenterXToSuperview()
         loginFBButton.anchor(top: loginButton.bottomAnchor,
                              width: loginButton.widthAnchor,
-                             topConstant: 32)
+                             topConstant: 16)
+        
+        loginGLButton.anchorCenterXToSuperview()
+        loginGLButton.anchor(top: loginFBButton.bottomAnchor,
+                             width: loginFBButton.widthAnchor,
+                             topConstant: 16)
     }
     
     func alertUserLoginError() {
@@ -194,7 +205,7 @@ extension LoginViewController: LoginButtonDelegate {
                   let email = result["email"] as? String else {print("failed to get name email from fb"); return }
 
             
-            let nameComponents = userName.components(separatedBy: "")
+            let nameComponents = userName.components(separatedBy: " ")
             guard nameComponents.count == 2 else { return }
             
             let firstName = nameComponents.first
@@ -202,8 +213,8 @@ extension LoginViewController: LoginButtonDelegate {
             
             DatabaseManager.shared.userExists(with: email) { (exists) in
                 if !exists {
-                    DatabaseManager.shared.insertUser(with: ChatAppUser(firstName: firstName ?? "",
-                                                                        lastName: lastName ?? "",
+                    DatabaseManager.shared.insertUser(with: ChatAppUser(firstName: firstName ?? "firstName",
+                                                                        lastName: lastName ?? "lastName",
                                                                         emailAdress: email))
                 }
             }
@@ -223,5 +234,36 @@ extension LoginViewController: LoginButtonDelegate {
             }
         }
 
+    }
+}
+
+extension LoginViewController: GIDSignInDelegate {
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        guard error == nil else { print("Failed login google"); return }
+        
+        guard let email = user.profile.email,
+              let firstName = user.profile.givenName,
+              let lastName = user.profile.familyName else { return }
+        
+        DatabaseManager.shared.userExists(with: email) { (exists) in
+            if !exists {
+                DatabaseManager.shared.insertUser(with: ChatAppUser(firstName: firstName,
+                                                                    lastName: lastName,
+                                                                    emailAdress: email))
+            }
+        }
+        
+        guard let authentication = user.authentication else {print("Missing auth object off of google user"); return }
+        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
+                                                       accessToken: authentication.accessToken)
+        FirebaseAuth.Auth.auth().signIn(with: credential) { (authResult, error) in
+            guard authResult != nil, error == nil else { return }
+            
+        }
+        self.navigationController?.dismiss(animated: true, completion: nil)
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+        print("user was disconected")
     }
 }

@@ -166,6 +166,7 @@
 				48374C1D258365F2005968D1 /* Resources */,
 				D795A58FF5664356BBF11145 /* [CP] Embed Pods Frameworks */,
 				481B92A62587AF3E002D7D63 /* ShellScript */,
+				6821827AF191B8DC5C5D3EBE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -263,6 +264,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+		};
+		6821827AF191B8DC5C5D3EBE /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-messager/Pods-messager-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-messager/Pods-messager-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-messager/Pods-messager-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		D795A58FF5664356BBF11145 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;

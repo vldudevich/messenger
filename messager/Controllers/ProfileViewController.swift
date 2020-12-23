@@ -7,6 +7,9 @@
 
 import UIKit
 import FirebaseAuth
+import FBSDKLoginKit
+import GoogleSignIn
+
 class ProfileViewController: UIViewController {
 
     let tableView = UITableView()
@@ -31,7 +34,6 @@ private extension ProfileViewController {
         tableView.tableFooterView = .init(frame: .zero)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.backgroundColor = .white
     }
     
     func setConstrains() {
@@ -72,6 +74,11 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         let logOutAction = UIAlertAction(title: "OK", style: .destructive) { [weak self] _ in
 
             guard let self = self else { return }
+            // Log out Facebook
+            FBSDKLoginKit.LoginManager().logOut()
+            // Log out Google
+            GIDSignIn.sharedInstance()?.signOut()
+            
             do {
                 try FirebaseAuth.Auth.auth().signOut()
                 
