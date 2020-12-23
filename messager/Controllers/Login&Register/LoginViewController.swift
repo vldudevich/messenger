@@ -99,7 +99,6 @@ private extension LoginViewController {
         Decorator.decorateTextField(textField: emailField, placeholderName: "Email", returnType: .next)
         Decorator.decorateTextField(textField: passwordField, placeholderName: "Password", returnType: .done)
         GIDSignIn.sharedInstance()?.presentingViewController = self
-        GIDSignIn.sharedInstance().signIn()
         GIDSignIn.sharedInstance().delegate = self
         loginFBButton.permissions = ["email, public_profile"]
         setConstaints()
