@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		481431DC25B1889A00E6B56F /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481431DB25B1889A00E6B56F /* ChatViewController.swift */; };
+		481431DF25B188A400E6B56F /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481431DE25B188A400E6B56F /* StorageManager.swift */; };
 		481B923025875094002D7D63 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481B922F25875094002D7D63 /* Logger.swift */; };
 		481B92D42588F0DC002D7D63 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481B92D32588F0DC002D7D63 /* DatabaseManager.swift */; };
 		481B92D8258A2154002D7D63 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481B92D7258A2154002D7D63 /* Error.swift */; };
@@ -32,6 +34,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		481431DB25B1889A00E6B56F /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		481431DE25B188A400E6B56F /* StorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		481B922F25875094002D7D63 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		481B92D32588F0DC002D7D63 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		481B92D7258A2154002D7D63 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
@@ -108,6 +112,7 @@
 				48374C28258365F2005968D1 /* Main.storyboard */,
 				48374C2B258365F4005968D1 /* Assets.xcassets */,
 				48374C2D258365F4005968D1 /* LaunchScreen.storyboard */,
+				481431DE25B188A400E6B56F /* StorageManager.swift */,
 				48374C30258365F4005968D1 /* Info.plist */,
 				48374C9125839AE1005968D1 /* UIView.swift */,
 				481B932B258E3562002D7D63 /* UITableVIewCell.swift */,
@@ -125,6 +130,7 @@
 		48374C3A2583665C005968D1 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				481431DB25B1889A00E6B56F /* ChatViewController.swift */,
 				48374C26258365F2005968D1 /* ConversationViewController.swift */,
 				48374C4D258366B3005968D1 /* ProfileViewController.swift */,
 				481B9311258CE100002D7D63 /* MainTabBarViewController.swift */,
@@ -315,6 +321,7 @@
 				48374C4825836699005968D1 /* VideoPlayerViewController.swift in Sources */,
 				481B9316258CF5B2002D7D63 /* Utils.swift in Sources */,
 				481B923025875094002D7D63 /* Logger.swift in Sources */,
+				481431DF25B188A400E6B56F /* StorageManager.swift in Sources */,
 				48374C23258365F2005968D1 /* AppDelegate.swift in Sources */,
 				48374C4E258366B3005968D1 /* ProfileViewController.swift in Sources */,
 				481B932C258E3562002D7D63 /* UITableVIewCell.swift in Sources */,
@@ -322,6 +329,7 @@
 				481B92F7258B494E002D7D63 /* testViewController.swift in Sources */,
 				48374C4025836674005968D1 /* RegisterViewController.swift in Sources */,
 				481B92D42588F0DC002D7D63 /* DatabaseManager.swift in Sources */,
+				481431DC25B1889A00E6B56F /* ChatViewController.swift in Sources */,
 				481B930D258CC9D9002D7D63 /* Decorator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
