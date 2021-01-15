@@ -7,8 +7,10 @@
 
 import UIKit
 import FirebaseAuth
+import MBProgressHUD
 class RegisterViewController: UIViewController {
-
+    
+    private var spinner = MBProgressHUD()
     private let scrollView = UIScrollView()
     
     private let scrollSubView = UIView()
@@ -20,6 +22,7 @@ class RegisterViewController: UIViewController {
     private let firstNameField = UITextField()
     
     private let lastNameField = UITextField()
+
     
     private let registerButton: UIButton = {
         let button = UIButton()
@@ -86,18 +89,40 @@ private extension RegisterViewController {
               !firstName.isEmpty,
               !lastName.isEmpty
         else { alertUserRegistrationError(message: .noFullFillProfile); return }
-        
+        spinner = MBProgressHUD.showAdded(to: self.view, animated: true)
         DatabaseManager.shared.userExists(with: email) { [weak self] exists in
             guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.spinner.hide(animated: true)
+            }
             guard !exists else { self.alertUserRegistrationError(message: .noFullFillProfile); return }
             
             FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password) { [weak self] authResult, error in
                 guard let self = self else { return }
                 guard authResult != nil, error == nil else { return }
                 
-                DatabaseManager.shared.insertUser(with: ChatAppUser(firstName: firstName,
-                                                                    lastName: lastName,
-                                                                    emailAdress: email))
+                let chatUser = ChatAppUser(firstName: firstName,
+                                           lastName: lastName,
+                                           emailAdress: email)
+                DatabaseManager.shared.insertUser(with: chatUser) { (success) in
+                    if success {
+                        guard let image = self.imageView.image,
+                              let data = image.pngData() else {
+                            return
+                        }
+                        let fileName = chatUser.profilePictureFileName
+                        StorageManager.shared.uploadProfilePicture(with: data,
+                                                                   fileName: fileName) { (result) in
+                            switch result {
+                            case .success(let dowloadUrl):
+                                UserDefaults.standard.set(dowloadUrl, forKey: "profile_picture_url")
+                                print(dowloadUrl)
+                            case .failure(let error):
+                                print("Storage error \(error)")
+                            }
+                        }
+                    }
+                }
                 self.navigationController?.dismiss(animated: true, completion: nil)
             }
         }

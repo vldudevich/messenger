@@ -13,6 +13,8 @@ enum Errors: Error {
     case noUserToken
     case noFullFillProfile
     case noLogout
+    case failedInsertToBD
+    case failedGetFromBD
     
     var errorText: String {
         switch self {
@@ -24,6 +26,10 @@ enum Errors: Error {
             return "Please fill all field"
         case .noLogout:
             return "Failed to logout"
+        case .failedInsertToBD:
+            return "Failed insert User to BD"
+        case .failedGetFromBD:
+            return "Failed Get From BD"
         }
     }
 }
